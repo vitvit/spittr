@@ -23,7 +23,7 @@ public class HomeControllerTest {
 	}
 	
 	@Test
-	public void testHome() throws Exception{
+	public void testHome() throws Exception {
 		mock.perform(get("/", "/home"))
 			.andExpect(view().name("home"));
 	}
