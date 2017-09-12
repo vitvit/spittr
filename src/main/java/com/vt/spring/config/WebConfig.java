@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.vt.spring")
+@ComponentScan(basePackages="com.vt.spring")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
@@ -28,6 +28,5 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
-	}
-	
+	}	
 }
