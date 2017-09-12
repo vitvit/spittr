@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.vt</groupId>
-  <artifactId>sprittr</artifactId>
+  <artifactId>spittr</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>spittr Maven Webapp</name>
@@ -31,7 +31,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>HelloWorld</finalName>
+		<finalName>Spittr</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -49,7 +49,7 @@
 					<version>2.4</version>
 					<configuration>
 						<warSourceDirectory>src/main/webapp</warSourceDirectory>
-						<warName>sprittr</warName>
+						<warName>spittr</warName>
 						<failOnMissingWebXml>false</failOnMissingWebXml>
 					</configuration>
 				</plugin>
