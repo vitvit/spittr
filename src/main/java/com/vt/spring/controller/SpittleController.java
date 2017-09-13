@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import domain.Spittle;
-import repository.SpittleRepository;
+import com.vt.spring.domain.Spittle;
+import com.vt.spring.repository.SpittleRepository;
 
 @Controller
 public class SpittleController {

@@ -1,4 +1,4 @@
-package domain;
+package com.vt.spring.domain;
 
 import java.util.Date;
 

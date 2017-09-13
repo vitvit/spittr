@@ -1,8 +1,8 @@
-package repository;
+package com.vt.spring.repository;
 
 import java.util.List;
 
-import domain.Spittle;
+import com.vt.spring.domain.Spittle;
 
 public interface SpittleRepository {
 	List<Spittle> findSpittles(long max, int count);
