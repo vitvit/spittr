@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.vt.spring.domain.Spittle;
 
-@Component
+@Repository
 public class SpittleRepositoryImpl implements SpittleRepository {
 
 	@Override
@@ -16,6 +16,13 @@ public class SpittleRepositoryImpl implements SpittleRepository {
 		return createSpittleList(count);
 	}
 	
+	@Override
+	public Spittle findOne(long id) {
+		Spittle spittle = new Spittle("Spittle " + id, new Date());
+		spittle.setId(id);
+		return spittle;
+	}
+
 	private List<Spittle> createSpittleList(int count) {
 		List<Spittle> spittles = new ArrayList<>();
 		for (long i = 0; i < count; i++){

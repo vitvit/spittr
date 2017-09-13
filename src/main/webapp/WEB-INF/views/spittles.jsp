@@ -17,7 +17,7 @@
 	<c:forEach items="${spittleList}" var="spittle">
 		<li id='spittle_<c:out value="spittle.id"/>'>
 			<div class="spittleMessage">	
-				<spring:url value="/spittle/{spittleId}" var="spittleUrl">
+				<spring:url value="/spittles/{spittleId}" var="spittleUrl">
 					<spring:param name="spittleId" value="${spittle.id}" />
 				</spring:url>
 				<a href="${spittleUrl}"><c:out value="${spittle.message}"/></a>

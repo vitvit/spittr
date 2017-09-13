@@ -64,8 +64,8 @@ public class SpittleControllerTest {
 	public void testShowSpittleSuccess() throws Exception {		
 		Spittle expectedSpittle = new Spittle("Test spittle", new Date());
 		expectedSpittle.setId(1);
-		
-		mock.perform(get("/spittle/{id}", 1))
+		when(spittleRepository.findOne(1)).thenReturn(expectedSpittle);
+		mock.perform(get("/spittles/{id}", 1))
 			.andExpect(view().name("spittle"))
 			.andExpect(model().attributeExists("spittle"))
 			.andExpect(model().attribute("spittle", expectedSpittle));
