@@ -26,12 +26,10 @@ import com.vt.spring.repository.SpittleRepository;
 public class SpittleControllerTest {
 
 	private MockMvc mock;
-	
 	@Mock
-	private SpittleRepository spittleRepository;
-	
+	private SpittleRepository spittleRepository;	
 	@InjectMocks
-	private SpittleController spittleController;
+	private SpittleController spittleController;	
 	
 	@Before
 	public void setup(){
@@ -51,6 +49,28 @@ public class SpittleControllerTest {
 			.andExpect(model().attribute("spittleList", hasItems(expectedSpittleList.toArray())));
 	}
 
+	@Test
+	public void testShowPagedRecentSpittlesSuccess() throws Exception {
+		List<Spittle> expectedSpittleList = createSpittleList(22);
+		
+		when(spittleRepository.findSpittles(233333, 22)).thenReturn(expectedSpittleList);
+		mock.perform(get("/spittles?max=233333&count=22"))
+			.andExpect(view().name("spittles"))
+			.andExpect(model().attributeExists("spittleList"))
+			.andExpect(model().attribute("spittleList", hasItems(expectedSpittleList.toArray())));
+	}
+	
+	@Test
+	public void testShowSpittleSuccess() throws Exception {		
+		Spittle expectedSpittle = new Spittle("Test spittle", new Date());
+		expectedSpittle.setId(1);
+		
+		mock.perform(get("/spittle/{id}", 1))
+			.andExpect(view().name("spittle"))
+			.andExpect(model().attributeExists("spittle"))
+			.andExpect(model().attribute("spittle", expectedSpittle));
+	}
+	
 	private List<Spittle> createSpittleList(int count) {
 		List<Spittle> spittles = new ArrayList<>();
 		for (int i = 0; i < count; i++){
