@@ -1,11 +1,30 @@
 package com.vt.spring.domain;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Spitter {
 	private long id;
+	
+	@NotNull
+	@Size(min=5, max=16)
 	private String username;
+	
+	@NotNull
+	@Size(min=5, max=25)
 	private String password;
+	
+	@NotNull
+	@Size(min=2, max=30)
 	private String firstname;
+	
+	@NotNull
+	@Size(min=2, max=30)
 	private String lastname;
+	
+	public Spitter() {}
 	
 	public Spitter(long id, String username, String password, String firstname, String lastname) {
 		this.id = id;
@@ -60,5 +79,15 @@ public class Spitter {
 	
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj, "id", "username");
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this, "id", "username");
 	}
 }

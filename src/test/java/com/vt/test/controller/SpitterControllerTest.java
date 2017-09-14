@@ -1,12 +1,11 @@
 package com.vt.test.controller;
 
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.atLeastOnce;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 import org.junit.Before;
@@ -42,18 +41,23 @@ public class SpitterControllerTest {
 	
 	@Test
 	public void testProcessRegistrationSuccess() throws Exception {
-		Spitter newSpitter = new Spitter("testspitter", "testpass", "test", "spitter");
-		Spitter savedSpitter = new Spitter(24L, "testspitter", "testpass", "test", "spitter");
-		
-		when(spitterRepository.save(newSpitter)).thenReturn(savedSpitter);
-				
 		mock.perform(post("/spitter/register")
-						.param("username", "testspitter")
-						.param("password", "testpass")
 						.param("firstname", "test")
-						.param("lastname", "spitter"))
+						.param("lastname", "spitter")
+						.param("username", "testspitter")
+						.param("password", "testpass"))
 			.andExpect(redirectedUrl("/spitter/testspitter"));
+	}
+	
+	@Test
+	public void testShowSpitterProfile() throws Exception {
+		Spitter expectedSpitter = new Spitter(333, "testname", "password ", "firstname", "lastname");
 		
-		verify(spitterRepository, atLeastOnce()).save(newSpitter);
+		when(spitterRepository.findByUsername("testname")).thenReturn(expectedSpitter);
+		
+		mock.perform(get("/spitter/{username}", "testname"))
+			.andExpect(view().name("profile"))
+			.andExpect(model().attributeExists("spitter"))
+			.andExpect(model().attribute("spitter", expectedSpitter));
 	}
 }

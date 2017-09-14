@@ -21,6 +21,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		viewResolver.setViewClass(JstlView.class);
 		viewResolver.setPrefix("/WEB-INF/views/");
 		viewResolver.setSuffix(".jsp");
+		viewResolver.setViewClass(org.springframework.web.servlet.view.JstlView.class);
 		
 		return viewResolver;
 	}
