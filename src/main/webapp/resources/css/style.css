@@ -3,5 +3,9 @@ span.error {
 }
 
 input.error {
-background-color: #ffcccc;
+	background-color: #ffcccc;
+}
+
+label.error {
+	color: red;
 }

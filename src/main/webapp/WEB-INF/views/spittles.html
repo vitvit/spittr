@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spittles</title>
+</head>
+<body>
+	<h1>Recent Spittles</h1>
+	<ul>
+		<li th:each="spittle : ${spittleList}" id='spittle_${spittle.id}"/>'>
+			<div class="spittleMessage">
+				<a th:href="@{|/spittles/${spittle.id}|}" th:text="${spittle.message}"></a>
+			</div>
+			<div>
+				<span class="spittleTime" th:text="${spittle.time}"></span>
+			</div>
+		</li>
+	</ul>
+</body>
+</html>

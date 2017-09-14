@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spittle</title>
+</head>
+<body>
+	<div class="spittleView">
+		<div class="spittleMessage" th:text="${spittle.message}"></div>
+		<div>
+			<span class="spittleTime" th:text="${spittle.time}"></span>
+		</div>
+	</div>
+</body>
+</html>
