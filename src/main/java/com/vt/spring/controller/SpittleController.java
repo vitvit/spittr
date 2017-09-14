@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.vt.spring.domain.Spittle;
 import com.vt.spring.repository.SpittleRepository;
 
+import exception.SpittleNotFoundException;
+
 @Controller
 @RequestMapping("/spittles")
 public class SpittleController {
@@ -23,12 +25,16 @@ public class SpittleController {
 	
 	@GetMapping
 	public List<Spittle> showRecentSpittles(@RequestParam(value="max", defaultValue=MAX_LONG_AS_STRING) long max,
-											@RequestParam(value="count", defaultValue="20") int count){
+											@RequestParam(value="count", defaultValue="20") int count) {
 		return spittleRepository.findSpittles(max, count);
 	}
 	
 	@GetMapping("/{id}")
-	public String showRecentSpittles(@PathVariable long id, Model model){
+	public String showRecentSpittles(@PathVariable long id, Model model) {
+		Spittle spittle = spittleRepository.findOne(id);
+		if (spittle == null) {
+			throw new SpittleNotFoundException();
+		}
 		model.addAttribute(spittleRepository.findOne(id));
 		return "spittle";
 	}
