@@ -1,4 +1,4 @@
-package com.vt.test.controller;
+package com.vt.spring.controller;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
