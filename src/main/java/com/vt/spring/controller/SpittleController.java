@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,17 +26,22 @@ public class SpittleController {
 	
 	@GetMapping
 	public List<Spittle> showRecentSpittles(@RequestParam(value="max", defaultValue=MAX_LONG_AS_STRING) long max,
-											@RequestParam(value="count", defaultValue="20") int count) {
+											@RequestParam(value="count", defaultValue="20") int count){
 		return spittleRepository.findSpittles(max, count);
 	}
 	
 	@GetMapping("/{id}")
-	public String showRecentSpittles(@PathVariable long id, Model model) {
+	public String showRecentSpittles(@PathVariable long id, Model model){
 		Spittle spittle = spittleRepository.findOne(id);
 		if (spittle == null) {
 			throw new SpittleNotFoundException();
 		}
-		model.addAttribute(spittleRepository.findOne(id));
+		model.addAttribute(spittle);
 		return "spittle";
+	}
+	
+	@ExceptionHandler(SpittleNotFoundException.class)
+	public String duplicateSprittrHandler() {
+		return "error/duplicate";
 	}
 }

@@ -15,6 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.vt.spring.domain.Spitter;
 import com.vt.spring.repository.SpitterRepository;
 
+import exception.DuplicateSpittrException;
+
 @Controller
 @RequestMapping("/spitter")
 public class SpitterController {
@@ -33,6 +35,9 @@ public class SpitterController {
 			RedirectAttributes redirectAttributes) {
 		if (errors.hasErrors()) {
 			return "registerForm";
+		}
+		if (spitterRepository.findByUsername(spitter.getUsername()) != null){
+			throw new DuplicateSpittrException();
 		}
 		spitterRepository.save(spitter);
 		redirectAttributes.addAttribute("username", spitter.getUsername());

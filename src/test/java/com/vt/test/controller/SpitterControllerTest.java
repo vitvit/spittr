@@ -1,6 +1,7 @@
 package com.vt.test.controller;
 
 import static org.mockito.Mockito.when;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -15,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.vt.spring.controller.AppWideExceptionHandler;
 import com.vt.spring.controller.SpitterController;
 import com.vt.spring.domain.Spitter;
 import com.vt.spring.repository.SpitterRepository;
@@ -30,7 +32,9 @@ public class SpitterControllerTest {
 	@Before
 	public void setup(){
 		MockitoAnnotations.initMocks(this);
-		mock = standaloneSetup(spitterController).build();
+		mock = standaloneSetup(spitterController)
+				.setControllerAdvice(new AppWideExceptionHandler())
+				.build();
 	}
 	
 	@Test
@@ -60,4 +64,15 @@ public class SpitterControllerTest {
 			.andExpect(model().attributeExists("spitter"))
 			.andExpect(model().attribute("spitter", expectedSpitter));
 	}
+	
+    @Test
+    public void testProcessRegistrationDuplicateFoundFault() throws Exception {
+		when(spitterRepository.findByUsername("testspitter")).thenReturn(new Spitter(333, "testspitter", "testpass ", "test", "spitter"));
+		mock.perform(post("/spitter/register")
+				.param("firstname", "test")
+				.param("lastname", "spitter")
+				.param("username", "testspitter")
+				.param("password", "testpass"))
+		 	.andExpect(view().name("error/duplicate"));
+    }
 }

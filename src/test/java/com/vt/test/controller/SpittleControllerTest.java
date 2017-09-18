@@ -71,6 +71,13 @@ public class SpittleControllerTest {
 			.andExpect(model().attribute("spittle", expectedSpittle));
 	}
 	
+	@Test
+	public void testShowSpittleNotFoundFault() throws Exception {		
+		when(spittleRepository.findOne(1)).thenReturn(null);
+		mock.perform(get("/spittles/{id}", 1))
+			.andExpect(view().name("error/duplicate"));
+	}
+	
 	private List<Spittle> createSpittleList(int count) {
 		List<Spittle> spittles = new ArrayList<>();
 		for (int i = 0; i < count; i++){
