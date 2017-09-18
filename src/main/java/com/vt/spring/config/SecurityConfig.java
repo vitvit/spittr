@@ -1,6 +1,6 @@
 package com.vt.spring.config;
 
-import javax.sql.DataSource;
+//import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -33,8 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        "and g.id = ga.group_id " +
 	        "and g.id = gm.group_id";
 	
-	@Autowired
-	DataSource dataSource;
+	//@Autowired
+	//DataSource dataSource;
 	@Autowired
 	SpitterRepository spitterRepository;
 	

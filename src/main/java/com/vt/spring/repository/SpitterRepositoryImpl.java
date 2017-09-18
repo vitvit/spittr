@@ -14,6 +14,6 @@ public class SpitterRepositoryImpl implements SpitterRepository {
 
 	@Override
 	public Spitter findByUsername(String username) {
-		return new Spitter(333, username, "password ", "firstname", "lastname");
+		return new Spitter(333, username, "password", "firstname", "lastname");
 	}
 }
