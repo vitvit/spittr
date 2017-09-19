@@ -4,8 +4,10 @@ package com.vt.spring.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 //import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -36,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	//@Autowired
 	//DataSource dataSource;
 	@Autowired
-	SpitterRepository spitterRepository;
+	private SpitterRepository spitterRepository;
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -71,5 +73,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		*/
 		//custom user service
 		auth.userDetailsService(new SpitterUserService(spitterRepository));
+	}
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+			.formLogin()
+				.loginPage("/login")
+			  .and()
+			.rememberMe()
+		        .tokenValiditySeconds(2419200)
+		        .key("spittrKey")
+		      .and()
+		    .logout()
+		        .logoutSuccessUrl("/")
+		      .and()
+			.authorizeRequests()
+				.antMatchers("/spitters/vitt").hasRole("SPITTER")
+				.antMatchers("/spittles").authenticated()
+				.antMatchers(HttpMethod.POST, "/spittles").hasRole("SPITTER")
+				.anyRequest().permitAll()
+			  .and()
+			.requiresChannel()
+				.antMatchers("/spitter/form").requiresSecure();
 	}
 }
