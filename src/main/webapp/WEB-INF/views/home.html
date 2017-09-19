@@ -1,9 +1,14 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <title>Spittr</title>
 </head>
 <body>
-	<a th:href="@{/logout}">Logout</a>
+	<div sec:authorize="isAuthenticated()">
+		<form th:action="@{/logout}" method="post">
+		    <input type="submit" value="Logout"/>
+		</form>
+	</div>
 	<h1 th:text="#{spittr.welcome}"></h1>
 	<a th:href="@{/spittles}">Spittles</a> |
 	<a th:href="@{/spitter/register}">Register</a>
