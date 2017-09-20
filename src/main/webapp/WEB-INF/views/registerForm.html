@@ -5,7 +5,7 @@
 </head>
 <body>
 	<h1>Register</h1>
-	<form method="POST" th:object="${spitter}">
+	<form method="POST" th:action="@{/spitter/register}" th:object="${spitter}">
 		<label th:class="${#fields.hasErrors('firstname')}? 'error'">First Name:</label>
 		<input type="text" th:field="*{firstname}" value="${spitter.firstname}" th:class="${#fields.hasErrors('firstname')}? 'error'"/>
 		<label th:if="${#fields.hasErrors('firstname')}" th:class="error" th:errors="*{firstname}"></label>
