@@ -51,7 +51,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		messageSource.setCacheSeconds(10);
 		return messageSource;
 	}
-
+	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();

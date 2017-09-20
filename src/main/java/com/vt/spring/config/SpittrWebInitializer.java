@@ -12,6 +12,8 @@ import org.springframework.web.servlet.DispatcherServlet;
 public class SpittrWebInitializer implements WebApplicationInitializer{
 	
 	public void onStartup(ServletContext servletContext) throws ServletException {
+		servletContext.setInitParameter("spring.profiles.active", "dev");
+		
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		rootContext.register(RootConfig.class);
 		
@@ -19,7 +21,6 @@ public class SpittrWebInitializer implements WebApplicationInitializer{
 		servletContext.addListener(contextLoaderListener);
 		AnnotationConfigWebApplicationContext webContext = new AnnotationConfigWebApplicationContext();
 		webContext.register(WebConfig.class);
-		
 		webContext.setServletContext(servletContext);
 	
 		ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher"
