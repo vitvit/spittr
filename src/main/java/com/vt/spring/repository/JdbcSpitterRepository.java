@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.stereotype.Repository;
 
@@ -35,7 +36,11 @@ public class JdbcSpitterRepository implements SpitterRepository {
 
 	@Override
 	public Spitter findByUsername(String username) {
-		return jdbcOperations.queryForObject(SQL_SELECT_SPITTER + "WHERE username = ?", this::mapRow , username);
+		try {
+			return jdbcOperations.queryForObject(SQL_SELECT_SPITTER + "WHERE username = ?", this::mapRow , username);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 	
 	private Spitter mapRow(ResultSet rs, int rowNum) throws SQLException {
