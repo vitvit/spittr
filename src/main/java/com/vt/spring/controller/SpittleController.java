@@ -20,14 +20,12 @@ import exception.SpittleNotFoundException;
 @RequestMapping("/spittles")
 public class SpittleController {
 
-	private static final String MAX_LONG_AS_STRING = "9223372036854775807"; 
 	@Autowired
 	private SpittleRepository spittleRepository;
 	
 	@GetMapping
-	public List<Spittle> showRecentSpittles(@RequestParam(value="max", defaultValue=MAX_LONG_AS_STRING) long max,
-											@RequestParam(value="count", defaultValue="20") int count){
-		return spittleRepository.findSpittles(max, count);
+	public List<Spittle> showRecentSpittles(@RequestParam(value="count", defaultValue="20") int count){
+		return spittleRepository.findRecentSpittles(count);
 	}
 	
 	@GetMapping("/{id}")

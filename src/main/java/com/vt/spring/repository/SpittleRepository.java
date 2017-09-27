@@ -5,6 +5,7 @@ import java.util.List;
 import com.vt.spring.domain.Spittle;
 
 public interface SpittleRepository {
-	List<Spittle> findSpittles(long max, int count);
+	List<Spittle> findRecentSpittles(int count);
+	Spittle save(Spittle spittle);
 	Spittle findOne(long id);
 }

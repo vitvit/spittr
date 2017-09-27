@@ -23,6 +23,18 @@ public class DataSourceConfig {
 					.build();
 	}
 	
+	/*@Bean
+	public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
+	  LocalSessionFactoryBean sfb = new LocalSessionFactoryBean();
+	  sfb.setDataSource(dataSource);
+	  sfb.setPackagesToScan(new String[] { "com.habuma.spittr.domain" });
+	  Properties props = new Properties();
+	  props.setProperty("dialect", "org.hibernate.dialect.H2Dialect");
+	  sfb.setHibernateProperties(props);
+	  return sfb;
+	}
+*/
+	
 	@Profile("qa")
 	@Bean
 	public DataSource basicDataSource() {

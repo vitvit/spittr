@@ -1,27 +1,41 @@
 package com.vt.spring.domain;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+@Entity
+@Table(name = "spitter")
 public class Spitter {
+	
+	@Id
+	@GeneratedValue
 	private long id;
 	
 	@NotNull
 	@Size(min=5, max=16, message="{username.size}")
+	@Column(name = "username")
 	private String username;
 	
 	@NotNull
 	@Size(min=5, max=25,  message="{password.size}")
+	@Column(name = "password")
 	private String password;
 	
 	@NotNull
 	@Size(min=2, max=30,  message="{firstname.size}")
+	@Column(name = "firstname")
 	private String firstname;
 	
 	@NotNull
 	@Size(min=2, max=30,  message="{lastname.size}")
+	@Column(name = "lastname")
 	private String lastname;
 	
 	public Spitter() {}

@@ -51,6 +51,16 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		messageSource.setCacheSeconds(10);
 		return messageSource;
 	}
+	/*
+	@Bean
+	public ConsoleAppender consoleAppender() {
+		ConsoleAppender consoleAppender = new ConsoleAppender();
+		consoleAppender.setThreshold(Level.ALL);
+		PatternLayout patternLayout = new PatternLayout();
+		patternLayout.setConversionPattern("%d %-5p [%c{1}] %m %n");
+		consoleAppender.setLayout(patternLayout);
+		return consoleAppender;
+	}*/
 	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {

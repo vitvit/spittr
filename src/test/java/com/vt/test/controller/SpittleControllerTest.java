@@ -42,7 +42,7 @@ public class SpittleControllerTest {
 	public void testShowRecentSpittlesSuccess() throws Exception {
 		List<Spittle> expectedSpittleList = createSpittleList(20);
 		
-		when(spittleRepository.findSpittles(Long.MAX_VALUE, 20)).thenReturn(expectedSpittleList);
+		when(spittleRepository.findRecentSpittles(20)).thenReturn(expectedSpittleList);
 		mock.perform(get("/spittles"))
 			.andExpect(view().name("spittles"))
 			.andExpect(model().attributeExists("spittleList"))
@@ -53,8 +53,8 @@ public class SpittleControllerTest {
 	public void testShowPagedRecentSpittlesSuccess() throws Exception {
 		List<Spittle> expectedSpittleList = createSpittleList(22);
 		
-		when(spittleRepository.findSpittles(233333, 22)).thenReturn(expectedSpittleList);
-		mock.perform(get("/spittles?max=233333&count=22"))
+		when(spittleRepository.findRecentSpittles(22)).thenReturn(expectedSpittleList);
+		mock.perform(get("/spittles?count=22"))
 			.andExpect(view().name("spittles"))
 			.andExpect(model().attributeExists("spittleList"))
 			.andExpect(model().attribute("spittleList", hasItems(expectedSpittleList.toArray())));
@@ -63,7 +63,7 @@ public class SpittleControllerTest {
 	@Test
 	public void testShowSpittleSuccess() throws Exception {		
 		Spittle expectedSpittle = new Spittle("Test spittle", new Date());
-		expectedSpittle.setId(1);
+		expectedSpittle.setId(1L);
 		when(spittleRepository.findOne(1)).thenReturn(expectedSpittle);
 		mock.perform(get("/spittles/{id}", 1))
 			.andExpect(view().name("spittle"))
