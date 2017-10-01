@@ -38,7 +38,6 @@ public class HibernateSpittleRepository implements SpittleRepository {
 	@Override
 	public Spittle findOne(long id) {
 		return (Spittle) getCurrentSession().get(Spittle.class, id);
-
 	}
 
 	@Override
@@ -46,6 +45,7 @@ public class HibernateSpittleRepository implements SpittleRepository {
 	public List<Spittle> findRecentSpittles(int count) {
 		return (List<Spittle>) getCurrentSession().createCriteria(Spittle.class)
 								.addOrder(Order.desc("postedTime"))
-								.list().get(0);
+								.setMaxResults(count)
+								.list();
 	}
 }
