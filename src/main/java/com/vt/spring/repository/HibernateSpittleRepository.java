@@ -32,7 +32,8 @@ public class HibernateSpittleRepository implements SpittleRepository {
 		Serializable id = getCurrentSession().save(spittle);
 		return new Spittle((Long) id,
 							spittle.getMessage(),
-							spittle.getPostedTime());
+							spittle.getPostedTime(),
+							spittle.getSpitter());
 	}
 
 	@Override

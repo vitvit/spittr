@@ -29,15 +29,18 @@ public class Spittle {
 	@ManyToOne
 	@JoinColumn(name = "spitter")
 	private Spitter spitter;
-	
-	public Spittle(Long id, String message, Date postedTime) {
+
+	public Spittle() {}
+
+	public Spittle(Long id, String message, Date postedTime, Spitter spitter) {
 		this.id = id;
 		this.message = message;
 		this.postedTime = postedTime;
+		this.spitter = spitter;
 	}
 
-	public Spittle(String message, Date postedTime) {
-		this(null, message, postedTime);
+	public Spittle(String message, Date postedTime, Spitter spitter) {
+		this(null, message, postedTime, spitter);
 	}
 	
 	public Long getId() {
@@ -62,6 +65,14 @@ public class Spittle {
 
 	public void setPostedTime(Date postedTime) {
 		this.postedTime = postedTime;
+	}
+	
+	public Spitter getSpitter() {
+		return spitter;
+	}
+
+	public void setSpitter(Spitter spitter) {
+		this.spitter = spitter;
 	}
 
 	@Override
