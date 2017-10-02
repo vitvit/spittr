@@ -8,8 +8,8 @@ import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 
 @Configuration
-@EnableMongoRepositories("com.vt.spring.document")
-public class MongoConfig extends AbstractMongoConfiguration{
+@EnableMongoRepositories("com.vt.spring.mongo.repository")
+public class MongoConfig extends AbstractMongoConfiguration {
 
 	//@Autowired
 	//Environment environment;
