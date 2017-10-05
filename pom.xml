@@ -103,7 +103,7 @@
 		<dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>${org.springframework-version}</version>
+            <version>4.2.9.RELEASE</version>
         </dependency>
 		<dependency>
 		   <groupId>org.hibernate</groupId>
