@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.view.InternalResourceView;
 
 import com.vt.spring.controller.SpittleController;
+import com.vt.spring.domain.Spitter;
 import com.vt.spring.domain.Spittle;
 import com.vt.spring.repository.SpittleRepository;
 
@@ -62,7 +63,7 @@ public class SpittleControllerTest {
 	
 	@Test
 	public void testShowSpittleSuccess() throws Exception {		
-		Spittle expectedSpittle = new Spittle("Test spittle", new Date());
+		Spittle expectedSpittle = new Spittle("Test spittle", new Date(), new Spitter());
 		expectedSpittle.setId(1L);
 		when(spittleRepository.findOne(1)).thenReturn(expectedSpittle);
 		mock.perform(get("/spittles/{id}", 1))
@@ -81,7 +82,7 @@ public class SpittleControllerTest {
 	private List<Spittle> createSpittleList(int count) {
 		List<Spittle> spittles = new ArrayList<>();
 		for (int i = 0; i < count; i++){
-			spittles.add(new Spittle("Spittle " + i, new Date()));
+			spittles.add(new Spittle("Spittle " + i, new Date(), new Spitter()));
 		}
 		return spittles;
 	}

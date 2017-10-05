@@ -2,7 +2,7 @@ drop table if exists spittle;
 drop table if exists spitter;
 
 create table spitter (
-  id identity,
+  id integer identity primary key,
   username varchar(25) not null,
   password varchar(25) not null,
   firstname varchar(100) not null,
